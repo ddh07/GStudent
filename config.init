@@ -1,0 +1,5 @@
+[database]
+host = "localhost"
+dbname = "bd_gest_project"
+username = "root"
+password = "admin"
