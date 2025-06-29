@@ -3,7 +3,7 @@ require '/classes/Connexion.php';
 require '/classes/Filiere.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $id = $_POST['id_filiere'] ?? null;
+    $id = Securite::validateInteger($_POST['id_filiere']) ?? null;
 
     if (!empty($id)) {
         $pdo = Connexion::getConnection();

@@ -3,18 +3,17 @@ require '/classes/Connexion.php';
 require '/classes/Etudiant.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $pdo = Connexion::getConnection();
-    $etudiant = new Etudiant($pdo);
-
-    $nom = $_POST['nom_etudiant'] ?? '';
-    $prenom = $_POST['Prenom_etudiant'] ?? '';
-    $age = $_POST['age'] ?? null;
-    $naissance = $_POST['date_naissance'] ?? null;
-    $filiere = $_POST['filiere'] ?? null;
-    $inscription = $_POST['date_inscription'] ?? date('Y-m-d');
+    $nom = Securite::validateData($_POST['nom_etudiant']) ?? '';
+    $prenom = Securite::validateData($_POST['Prenom_etudiant']) ?? '';
+    $age = Securite::validateInteger($_POST['age']) ?? null;
+    $naissance = Securite::validateDate($_POST['date_naissance']) ?? null;
+    $filiere = Securite::validateData($_POST['filiere']) ?? null;
+    $inscription = Securite::validateDate($_POST['date_inscription']) ?? date('Y-m-d');
     $photo = $_POST['photo_profil'] ?? null;
 
     if ($nom && $prenom && $filiere) {
+        $pdo = Connexion::getConnection();
+        $etudiant = new Etudiant($pdo);
         $etudiant->addEtudiant($nom, $prenom, $age, $naissance, $filiere, $inscription, $photo);
         echo "Étudiant ajouté.";
     } else {

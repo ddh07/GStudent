@@ -3,9 +3,9 @@ require '/classes/Connexion.php';
 require '/classes/Filiere.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $id = $_POST['id_filiere'] ?? null;
-    $libelle = $_POST['libelle_filiere'] ?? '';
-    $description = $_POST['description_filiere'] ?? null;
+    $id = Securite::validateInteger($_POST['id_filiere']) ?? null;
+    $libelle = Securite::validateData($_POST['libelle_filiere']) ?? '';
+    $description = Securite::validateData($_POST['description_filiere']) ?? null;
 
     if (!empty($id) && !empty($libelle)) {
         $pdo = Connexion::getConnection();

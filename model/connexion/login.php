@@ -2,19 +2,20 @@
 session_start();
 
 require '/classes/Connexion.php';
+require '/classes/Securite.php';
 
 $pdo = Connexion::getConnection();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $email = $_POST['email'] ?? '';
-    $password = $_POST['password'] ?? '';
+    $email = Securite::validateData($_POST['email']) ?? '';
+    $password = Securite::validateData($_POST['password']) ?? '';
 
     if (!empty($email) && !empty($password)) {
         $stmt = $pdo->prepare("SELECT * FROM utilisateur WHERE email = :email");
         $stmt->execute([':email' => $email]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if ($user && password_verify($password, $user['password'])) {
+        if ($user && Securite::validatePassword($password, $user['password'])) {
             $_SESSION['id_user'] = $user['id_user'];
             $_SESSION['username'] = $user['username'];
             $_SESSION['id_role'] = $user['id_role'];

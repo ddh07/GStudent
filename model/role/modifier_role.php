@@ -4,8 +4,8 @@ require '/classes/Role.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id = $_POST['id_role'] ?? null;
-    $nom = $_POST['libelle_role'] ?? '';
-    $desc = $_POST['description_role'] ?? null;
+    $nom = Securite::validateData($_POST['libelle_role']) ?? '';
+    $desc = Securite::validateData($_POST['description_role']) ?? null;
 
     if (!empty($id) && !empty($nom)) {
         $pdo = Connexion::getConnection();
