@@ -2,7 +2,7 @@
 class Config{
     private $config = [];
 
-    public function __construct($chemin = '/config.ini'){
+    public function __construct($chemin = '../../config.ini'){
         if (!file_exists($chemin)) {
             throw new Exception("Fichier de configuration introuvable : $chemin");
         }
