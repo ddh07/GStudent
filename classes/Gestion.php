@@ -1,4 +1,7 @@
 <?php
+/**
+ * Garde une trace des action effectuer par les utilisateurs sur chaque etudiant
+ */
 class Gestion {
     private $pdo;
 
@@ -14,7 +17,7 @@ class Gestion {
      * @param mixed $id_etudiant
      * @param mixed $action
      * 
-     * @return [type]
+     * @return bool
      */
     public function saveAction($id_utilisateur, $id_etudiant, $action) {
         $sql = "INSERT INTO gestion (id_utilisateur, id_etudiant, action, date_gestion)
@@ -30,7 +33,7 @@ class Gestion {
     }
 
     /**
-     * @return [type]
+     * @return mexed
      */
     public function getAllActions() {
         $sql = "SELECT g.*, u.username, e.nom_etudiant, e.Prenom_etudiant

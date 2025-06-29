@@ -1,7 +1,7 @@
 <?php
     require 'Config.php';
 /**
- * [Description Securite]
+ * Gere l'intégrité et la conformité des donnée avant toutes insertion dans la bases de donnée
  */
 class Securite{
     private $extension = null;
@@ -58,7 +58,7 @@ class Securite{
     /**
      * @param mixed $date
      * Vérifie le format YYYY-MM-DD
-     * @return [type]
+     * @return String
      */
     public static function validateDate($date){
         $d = DateTime::createFromFormat('Y-m-d', $date);
@@ -71,7 +71,7 @@ class Securite{
      * Vérifie la taille
      * Vérifie l’extension
      * Vérifie le type MIME
-     * @return [type]
+     * @return String d'erreur ou 'OK' si validé
      */
     function validateFileImage($fichier){
         try{

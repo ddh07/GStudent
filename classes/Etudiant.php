@@ -1,6 +1,6 @@
 <?php
 /**
- * [Gestion des opérations sur les etudiants]
+ * Gestion des opérations sur les etudiants
  */
 class Etudiant {
 
@@ -21,7 +21,7 @@ class Etudiant {
      * @param null $date_inscription
      * @param null $photo_profil
      * 
-     * @return [bool]
+     * @return boll
      * 
      * [Ajout d'un nouveal etudiant dans la base de données]
      */
@@ -44,7 +44,7 @@ class Etudiant {
     
     /**
      * [Lire tous les etudiant enregistrés dans la base de donnée]
-     * @return [array{  }]
+     * @return mexed
      */
     public function getAllEtudiant()
     {
@@ -57,7 +57,7 @@ class Etudiant {
     /**
      * @param mixed $id_etudiant
      * [Lire un etudiant suivant l'id]
-     * @return [raay{ }]
+     * @return mexed
      */
     public function getEtudiant($id_etudiant)
     {
@@ -78,7 +78,7 @@ class Etudiant {
      * @param null $date_inscription
      * @param null $photo_profil
      * [Mettre à jour les information d'un étudiant]
-     * @return [bool]
+     * @return bool
      */
     public function updateEtudiant($id_etudiant,$nom_etudiant,$prenom_etudiant,$age,$date_naissance,$filiere,$date_inscription = null,$photo_profil = null)
     {
@@ -103,9 +103,9 @@ class Etudiant {
     /**
      * @param mixed $id_etudiant
      * 
-     * [Supprimer un etudiant]
+     * Supprimer un etudiant
      * 
-     * @return [bool]
+     * @return bool
      */
     public function deleteEtudiant( $id_etudiant)
     {
@@ -119,7 +119,7 @@ class Etudiant {
      * 
      * [Obtenir le total des etudiants enregistrés]
      * 
-     * @return [type]
+     * @return mexed
      */
     public  function getCountAllEtudiant(){
         $sql = "SELECT COUNT(*) AS total_etudiant FROM etudiants";
@@ -131,7 +131,7 @@ class Etudiant {
     /**
      * [Obtenir le nombre d'etudiant par filiere]
      * 
-     * @return [type]
+     * @return mexed
      */
     public function getCountAllEtudiantByFiliere() {
         $sql = "SELECT f.libelle_filiere, COUNT(e.Id_etudiant) AS total
@@ -147,7 +147,7 @@ class Etudiant {
      * 
      * Rechercher des étudiants suivant le nom, prénom ou la filiere
      * 
-     * @return [type]
+     * @return mexed
      */
     public function searchEtudiant($keyword){
         $sql = "SELECT * FROM etudiants
