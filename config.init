@@ -1,5 +1,10 @@
 [database]
-host = "localhost"
-dbname = "bd_gest_project"
-username = "root"
-password = "admin"
+host = localhost
+dbname = bd_gest_project
+username = root
+password = admin
+
+[upload]
+extension = jpg,jpeg,png
+siez = 2097152
+mimes = image/jpg,image/jpeg,image/png
