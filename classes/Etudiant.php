@@ -25,7 +25,7 @@ class Etudiant {
      * 
      * [Ajout d'un nouveal etudiant dans la base de données]
      */
-    public function add($id_etudiant,$nom_etudiant,$prenom_etudiant,$age,$date_naissance,$filiere,$date_inscription = null,$photo_profil = null){
+    public function addEtudiant($id_etudiant,$nom_etudiant,$prenom_etudiant,$age,$date_naissance,$filiere,$date_inscription = null,$photo_profil = null){
         $sql = "INSERT INTO etudiants (nom_etudiant, prenom_etudiant, age, date_naissance, filiere, date_inscription, photo_profil)
                 VALUES (:nom, :prenom, :age, :naissance, :filiere, :inscription, :photo)";
         $stmt =  $this->pdo->prepare($sql);
@@ -80,7 +80,7 @@ class Etudiant {
      * [Mettre à jour les information d'un étudiant]
      * @return [bool]
      */
-    public function update($id_etudiant,$nom_etudiant,$prenom_etudiant,$age,$date_naissance,$filiere,$date_inscription = null,$photo_profil = null)
+    public function updateEtudiant($id_etudiant,$nom_etudiant,$prenom_etudiant,$age,$date_naissance,$filiere,$date_inscription = null,$photo_profil = null)
     {
         $sql = "UPDATE etudiants
                 SET nom_etudiant = :nom, prenom_etudiant = :prenom, age = :age, date_naissance = :naissance, 
@@ -107,7 +107,7 @@ class Etudiant {
      * 
      * @return [bool]
      */
-    public function delete( $id_etudiant)
+    public function deleteEtudiant( $id_etudiant)
     {
         $sql = "DELETE FROM etudiants WHERE id_etudiant = :id";
         $stmt =  $this->pdo->prepare($sql);
@@ -149,7 +149,7 @@ class Etudiant {
      * 
      * @return [type]
      */
-    public function search($keyword){
+    public function searchEtudiant($keyword){
         $sql = "SELECT * FROM etudiants
             WHERE nom_etudiant LIKE :keyword 
                OR Prenom_etudiant LIKE :keyword 
