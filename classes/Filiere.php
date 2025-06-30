@@ -1,6 +1,6 @@
 <?php
 /**
- * [Description Filiere]
+ * Description Filiere
  */
 class Filiere {
     private $pdo;

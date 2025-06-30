@@ -1,6 +1,6 @@
 <?php
 /**
- * [Gestion des Roles]
+ * Gestion des Roles des utilisateurs
  */
 class Role {
     private $pdo;
@@ -13,7 +13,7 @@ class Role {
      * @param mixed $libelle_role
      * @param null $description_role
      * 
-     * @return [type]
+     * @return bool true or false
      */
     public function addRole($libelle_role, $description_role = null) {
         $sql = "INSERT INTO role (libelle_role, description_role) VALUES (:libelle_role, :description_role)";
@@ -27,7 +27,7 @@ class Role {
     /**
      * @param mixed $id_role
      * 
-     * @return [type]
+     * @return mexed
      */
     public function getRoleById($id_role) {
         $sql = "SELECT * FROM role WHERE id_role = :id_role";
@@ -41,7 +41,7 @@ class Role {
      * @param mixed $libelle_role
      * @param null $description_role
      * 
-     * @return [type]
+     * @return bool
      */
     public function updateRole($id_role, $libelle_role, $description_role = null) {
         $sql = "UPDATE role SET libelle_role = :libelle_role, description_role = :description_role WHERE id_role = :id_role";
@@ -56,7 +56,7 @@ class Role {
     /**
      * @param mixed $id_role
      * 
-     * @return [type]
+     * @return bool
      */
     public function deleteRole($id_role) {
         $sql = "DELETE FROM role WHERE id_role = :id_role";
@@ -65,7 +65,7 @@ class Role {
     }
 
     /**
-     * @return [type]
+     * @return mexed
      */
     public function getAllRole() {
         $sql = "SELECT * FROM role ORDER BY id_role ASC";
