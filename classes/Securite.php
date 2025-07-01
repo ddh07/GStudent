@@ -8,10 +8,12 @@ class Securite{
     private $config = null;
 
     function __construct(){
+        logger::log("Initialisation du control d'integrité et de conformité");
         try{
             $this->config = new Config();
         }catch(Exception $e){
             echo "erreur ".$e->getMessage();
+            logger::log($e->getMessage(),'ERREUR');
         }
     }
 
