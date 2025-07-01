@@ -1,5 +1,5 @@
 <?php
-require 'logs/logs.php';
+require 'logs/logger.php';
 session_start();
 
 if (!isset($_SESSION['user_id'])) {
