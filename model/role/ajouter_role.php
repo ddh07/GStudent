@@ -15,3 +15,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo "Le nom du rôle est requis.";
     }
 }
+exit();

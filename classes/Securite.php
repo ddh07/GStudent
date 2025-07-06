@@ -1,5 +1,5 @@
 <?php
-    require 'Config.php';
+
 /**
  * Gere l'intégrité et la conformité des donnée avant toutes insertion dans la bases de donnée
  */
@@ -8,12 +8,12 @@ class Securite{
     private $config = null;
 
     function __construct(){
-        logger::log("Initialisation du control d'integrité et de conformité");
+        MyLogger::log("Initialisation du control d'integrité et de conformité");
         try{
             $this->config = new Config();
         }catch(Exception $e){
             echo "erreur ".$e->getMessage();
-            logger::log($e->getMessage(),'ERREUR');
+            MyLogger::log($e->getMessage(),'ERREUR');
         }
     }
 
@@ -64,45 +64,11 @@ class Securite{
      */
     public static function validateDate($date){
         $d = DateTime::createFromFormat('Y-m-d', $date);
-        return $d && $d->format('Y-m-d') === $date;
+        if ($d && $d->format('Y-m-d') === $date){
+            return $date;
+        }else{
+            return false;
+        }
     }
 
-    /**
-     * @param mixed $fichier
-     * Vérifie l'erreur
-     * Vérifie la taille
-     * Vérifie l’extension
-     * Vérifie le type MIME
-     * @return String d'erreur ou 'OK' si validé
-     */
-    function validateFileImage($fichier){
-        try{
-            $config = new Config();
-            if ($fichier['erreur'] !== UPLOAD_ERR_OK) {
-                return "Erreur lors de l'upload.";
-            }
-
-            if ($fichier['size'] > $config->getimagesizeAutorize()) {
-                return "Fichier trop volumineux.";
-            }
-
-            $extension = strtolower(pathinfo($fichier['name'], PATHINFO_EXTENSION));
-            if (!in_array($extension, $config->getExtensionsAutorize())) {
-                 return "Extension non autorisée.";
-            }
-
-            $finfo = finfo_open(FILEINFO_MIME_TYPE);
-            $typeMime = finfo_file($finfo, $fichier['tmp_name']);
-            finfo_close($finfo);
-
-            if (!in_array($typeMime, $config->getMimesAutorize())) {
-                return "Type MIME non autorisé.";
-            }
-
-        }catch(Exception $e){
-            echo "erreur ".$e->getMessage();
-        }
-    
-    return "OK";
-}
 }

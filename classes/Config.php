@@ -1,8 +1,11 @@
 <?php
 class Config{
     private $config = [];
+    private String $chemin = "";
 
     public function __construct($chemin = '../../config.ini'){
+        $this->chemin = $chemin;
+
         if (!file_exists($chemin)) {
             throw new Exception("Fichier de configuration introuvable : $chemin");
         }
@@ -50,4 +53,43 @@ class Config{
         return array_map('trim', explode(',', $ext));
     }
 
+    public function getConfig(){
+        return $this->config;
+    }
+
+    /**
+     * @param array $configArray
+     * 
+     * Fonction pour convertir le tableau PHP en format .ini
+     * @return string
+     */
+    private function arrayToIniString(array $configArray): string {
+        $output = '';
+        foreach ($configArray as $section => $settings) {
+            $output .= "[$section]\n";
+            foreach ($settings as $key => $value) {
+                $value = str_replace("\"", "\\\"", $value);
+                $output .= "$key = \"$value\"\n";
+            }
+            $output .= "\n";
+        }
+        return $output;
+    }
+
+    /**
+     * @param array $configArray
+     * Fonction pour enregistrer les nouvelles parametrage dans le fichier de configuration
+     * @return bool
+     */
+    public function saveMyConfig(array $configArray) :bool{
+
+        $iniString = $this->arrayToIniString($configArray);
+
+        if (is_writable($this->chemin)) {
+            file_put_contents($this->chemin, $iniString);
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

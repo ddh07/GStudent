@@ -1,10 +1,10 @@
 <?php
-require 'logs/logger.php';
 session_start();
+require 'logs/MyLogger.php';
 
 if (!isset($_SESSION['user_id'])) {
     header('Location: /vue/login.php');
-    Logger::log("Demmerage");
+    MyLogger::log("Demmerage");
     exit;
 }
 

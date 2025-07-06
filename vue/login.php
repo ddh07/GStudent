@@ -1,14 +1,28 @@
+<?php
+  session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Login</title>
-  <link rel="stylesheet" href="/public/css/style.css" />
+  <link rel="stylesheet" href="/public/css/style_login.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <script src="/public/js/script.js"></script>
 </head>
+
 <body>
+  <?php if (isset($_SESSION['notif'])): ?>
+  <div class="notification notif is-<?= $_SESSION['notif']['type'] ?>">
+    <button class="delete" onclick="this.parentElement.style.display='none';"></button>
+    <?= htmlspecialchars($_SESSION['notif']['message']) ?>
+  </div>
+  <?php unset($_SESSION['notif']); ?>
+<?php endif; ?>
+
   <div class="login-container">
     <div class="avatar">
       <i class="fa fa-user"></i>
@@ -30,4 +44,5 @@
     </form>
   </div>
 </body>
+
 </html>
